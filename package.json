@@ -1,0 +1,45 @@
+{
+  "name": "tistory-theme-preview",
+  "version": "1.0.0",
+  "description": "Zero-config local live preview & debugging suite for Tistory custom themes and skins.",
+  "main": "lib/server.js",
+  "bin": {
+    "tistory-theme-preview": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node test/parser.test.js"
+  },
+  "keywords": [
+    "tistory",
+    "tistory-skin",
+    "tistory-theme",
+    "preview",
+    "live-reload",
+    "template-engine",
+    "cli"
+  ],
+  "author": "Joo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joostory/tistory-theme-preview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joostory/tistory-theme-preview/issues"
+  },
+  "homepage": "https://github.com/joostory/tistory-theme-preview#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "sample-theme/",
+    "dashboard.html",
+    "README.md"
+  ]
+}

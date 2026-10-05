@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[##_page_title_##]</title>
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Dynamic Skin Color Variables Injection -->
+  <style>
+    :root {
+      --primary: [##_var_point-color_##] !important;
+    }
+  </style>
+
+  <s_if_var_scroll-load>
+    <!-- Infinite scroll enabled by skin options -->
+    <script>
+      console.log('Tistory Infinite Scroll Mode Active');
+    </script>
+  </s_if_var_scroll-load>
+</head>
+<body id="[##_body_id_##]" class="theme-[##_var_theme-mode_##]">
+<s_t3>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="site-title">
+        <a href="[##_blog_link_##]">[##_title_##]</a>
+      </h1>
+      <nav class="site-nav">
+        [##_blog_menu_##]
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    [##_revenue_list_upper_##]
+
+    <div class="layout-grid">
+      <!-- Main Content Area -->
+      <main class="main-content">
+
+        <!-- 1. Home Cover Group (Only active on index with cover enabled) -->
+        <s_cover_group>
+          <s_cover_rep>
+            
+            <!-- Featured Cover -->
+            <s_cover name="featured">
+              <section class="cover-featured">
+                <h2 class="cover-section-title">[##_cover_title_##]</h2>
+                <div class="featured-grid">
+                  <s_cover_item>
+                    <div class="featured-card">
+                      <s_cover_item_thumbnail>
+                        <a href="[##_cover_item_url_##]">
+                          <img class="featured-thumb" src="[##_cover_item_thumbnail_##]" alt="[##_cover_item_title_##]">
+                        </a>
+                      </s_cover_item_thumbnail>
+                      <div class="featured-body">
+                        <h3 class="featured-title">
+                          <a href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
+                        </h3>
+                        <p class="featured-summary">[##_cover_item_summary_##]</p>
+                      </div>
+                    </div>
+                  </s_cover_item>
+                </div>
+              </section>
+            </s_cover>
+
+            <!-- List Cover -->
+            <s_cover name="list">
+              <section class="cover-list">
+                <h2 class="cover-section-title">[##_cover_title_##]</h2>
+                <div class="post-list-wrap">
+                  <s_cover_item>
+                    <article class="post-card">
+                      <s_cover_item_thumbnail>
+                        <a href="[##_cover_item_url_##]">
+                          <img class="post-card-thumb" src="[##_cover_item_thumbnail_##]" alt="[##_cover_item_title_##]">
+                        </a>
+                      </s_cover_item_thumbnail>
+                      <div class="post-card-body">
+                        <div class="post-meta">
+                          <span class="category">[##_cover_item_category_##]</span>
+                          <span>•</span>
+                          <span>[##_cover_item_date_##]</span>
+                        </div>
+                        <h3 class="post-card-title">
+                          <a href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
+                        </h3>
+                        <p class="post-card-summary">[##_cover_item_summary_##]</p>
+                      </div>
+                    </article>
+                  </s_cover_item>
+                </div>
+              </section>
+            </s_cover>
+
+          </s_cover_rep>
+        </s_cover_group>
+
+        <!-- 2. List Header (Category / Search / Tag List) -->
+        <s_list>
+          <div class="list-header" style="margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            <h2 style="font-size: 22px; font-weight: 700;">
+              '[##_list_conform_##]' <span style="font-size: 16px; color: var(--primary);">([##_list_count_##]건)</span>
+            </h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">[##_list_description_##]</p>
+          </div>
+
+          <s_list_empty>
+            <div style="text-align: center; padding: 60px 0; color: var(--text-muted);">
+              <h3>검색된 결과가 없습니다.</h3>
+              <p style="font-size: 13px; margin-top: 8px;">다른 검색어나 키워드로 다시 시도해 보세요.</p>
+            </div>
+          </s_list_empty>
+
+          <s_list_rep>
+            <article class="post-card">
+              <s_list_rep_thumbnail>
+                <a href="[##_list_rep_link_##]">
+                  <img class="post-card-thumb" src="[##_list_rep_thumbnail_##]" alt="[##_list_rep_title_##]">
+                </a>
+              </s_list_rep_thumbnail>
+              <div class="post-card-body">
+                <div class="post-meta">
+                  <span class="category">[##_list_rep_category_##]</span>
+                  <span>•</span>
+                  <span>[##_list_rep_regdate_##]</span>
+                </div>
+                <h3 class="post-card-title">
+                  <a href="[##_list_rep_link_##]">[##_list_rep_title_##]</a>
+                </h3>
+                <p class="post-card-summary">[##_list_rep_summary_##]</p>
+              </div>
+            </article>
+          </s_list_rep>
+        </s_list>
+
+        <!-- 3. Articles Loop (Index & Permalink) -->
+        <s_article_rep>
+
+          <!-- Index Article Card -->
+          <s_index_article_rep>
+            <article class="post-card">
+              <s_article_rep_thumbnail>
+                <a href="[##_article_rep_link_##]">
+                  <img class="post-card-thumb" src="[##_article_rep_thumbnail_url_##]" alt="[##_article_rep_title_##]">
+                </a>
+              </s_article_rep_thumbnail>
+              <div class="post-card-body">
+                <div class="post-meta">
+                  <span class="category">[##_article_rep_category_##]</span>
+                  <span>•</span>
+                  <span>[##_article_rep_simple_date_##]</span>
+                  <span>•</span>
+                  <span>댓글 [##_article_rep_rp_cnt_##]</span>
+                </div>
+                <h3 class="post-card-title">
+                  <a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a>
+                </h3>
+                <p class="post-card-summary">[##_article_rep_summary_##]</p>
+              </div>
+            </article>
+          </s_index_article_rep>
+
+          <!-- Permalink Full Article View -->
+          <s_permalink_article_rep>
+            <article class="single-article">
+              <header class="article-header">
+                <div class="post-meta" style="margin-bottom: 10px;">
+                  <span class="category">[##_article_rep_category_##]</span>
+                  <span>•</span>
+                  <span>[##_article_rep_date_##]</span>
+                  <span>•</span>
+                  <span>작성자: [##_article_rep_author_##]</span>
+                </div>
+                <h1 class="article-title">[##_article_rep_title_##]</h1>
+              </header>
+
+              <div class="article-body">
+                [##_article_rep_desc_##]
+              </div>
+
+              <!-- Tags -->
+              <s_tag_label>
+                <div class="article-tags" style="margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 13px;">
+                  <strong style="color: var(--primary);">TAGS:</strong> [##_tag_label_rep_##]
+                </div>
+              </s_tag_label>
+
+              <!-- Related Articles -->
+              <s_article_related>
+                <div style="margin-top: 36px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border-color);">
+                  <h4 style="font-size: 14px; margin-bottom: 12px;">'[##_article_rep_category_##]' 카테고리의 다른 글</h4>
+                  <ul style="list-style: none; font-size: 13px;">
+                    <s_article_related_rep>
+                      <li style="padding: 4px 0;">
+                        <a href="[##_article_related_rep_link_##]">• [##_article_related_rep_title_##]</a>
+                        <span style="color: var(--text-muted); font-size: 12px; margin-left: 8px;">([##_article_related_rep_date_##])</span>
+                      </li>
+                    </s_article_related_rep>
+                  </ul>
+                </div>
+              </s_article_related>
+
+              <!-- Prev / Next Articles -->
+              <div style="display: flex; justify-content: space-between; margin-top: 24px; font-size: 13px;">
+                <s_article_prev>
+                  <a href="[##_article_prev_link_##]">← 이전 글: [##_article_prev_title_##]</a>
+                </s_article_prev>
+                <s_article_next>
+                  <a href="[##_article_next_link_##]">다음 글: [##_article_next_title_##] →</a>
+                </s_article_next>
+              </div>
+
+              <!-- Comments Widget -->
+              [##_comment_group_##]
+            </article>
+          </s_permalink_article_rep>
+
+        </s_article_rep>
+
+        <!-- 4. Notice View -->
+        <s_notice_rep>
+          <article class="single-article">
+            <header class="article-header">
+              <div class="post-meta" style="color: var(--primary);">공지사항 • [##_notice_rep_date_##]</div>
+              <h1 class="article-title">[##_notice_rep_title_##]</h1>
+            </header>
+            <div class="article-body">
+              [##_notice_rep_desc_##]
+            </div>
+          </article>
+        </s_notice_rep>
+
+        <!-- 5. Protected Post View -->
+        <s_article_protected>
+          <div class="protected-box">
+            <h2 style="font-size: 22px; margin-bottom: 12px;">[##_article_rep_title_##]</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">보호되어 있는 글입니다. 내용을 보시려면 비밀번호를 입력하세요.</p>
+            <div style="display: flex; gap: 8px; max-width: 320px;">
+              <input type="password" id="[##_article_password_##]" placeholder="비밀번호" style="flex: 1; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.3); color: #fff;">
+              <button type="button" onclick="[##_article_dissolve_##]" style="background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;">확인</button>
+            </div>
+          </div>
+        </s_article_protected>
+
+        <!-- 6. Standalone Page View -->
+        <s_page_rep>
+          <article class="single-article">
+            <h1 class="article-title" style="margin-bottom: 20px;">[##_article_rep_title_##]</h1>
+            <div class="article-body">
+              [##_article_rep_desc_##]
+            </div>
+          </article>
+        </s_page_rep>
+
+        <!-- 7. Tag Cloud View (/tag) -->
+        <s_tag>
+          <div class="tag-cloud-box">
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 18px;">태그 클라우드 (Tag Cloud)</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <s_tag_rep>
+                <a href="[##_tag_link_##]" class="[##_tag_class_##]" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 13px;">
+                  #[##_tag_name_##]
+                </a>
+              </s_tag_rep>
+            </div>
+          </div>
+        </s_tag>
+
+        <!-- 8. Guestbook View (/guestbook) -->
+        <s_guest>
+          <div class="guestbook-box">
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 18px;">방명록</h2>
+            [##_guestbook_group_##]
+          </div>
+        </s_guest>
+
+        <!-- Pagination -->
+        <s_paging>
+          <nav class="pagination">
+            <a [##_prev_page_##] class="[##_no_more_prev_##]">이전</a>
+            <s_paging_rep>
+              <a [##_paging_rep_link_##]>[##_paging_rep_link_num_##]</a>
+            </s_paging_rep>
+            <a [##_next_page_##] class="[##_no_more_next_##]">다음</a>
+          </nav>
+        </s_paging>
+
+      </main>
+
+      <!-- Sidebar Area -->
+      <aside class="sidebar-panel">
+        <s_sidebar>
+
+          <!-- Search Widget -->
+          <s_sidebar_element>
+            <!-- 검색 모듈 -->
+            <div class="sidebar-card">
+              <h3 class="sidebar-title">검색</h3>
+              <s_search>
+                <div style="display: flex; gap: 6px;">
+                  <input type="text" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="검색어 입력..." style="flex: 1; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.3); color: #fff; font-size: 12px;" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }">
+                  <button type="button" onclick="[##_search_onclick_submit_##]" style="background: var(--primary); border: none; color: #fff; padding: 7px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;">검색</button>
+                </div>
+              </s_search>
+            </div>
+          </s_sidebar_element>
+
+          <!-- Category Widget -->
+          <s_sidebar_element>
+            <!-- 카테고리 -->
+            <div class="sidebar-card">
+              <h3 class="sidebar-title">카테고리</h3>
+              [##_category_list_##]
+            </div>
+          </s_sidebar_element>
+
+          <!-- Recent Posts Widget -->
+          <s_sidebar_element>
+            <!-- 최근 글 -->
+            <div class="sidebar-card">
+              <h3 class="sidebar-title">최근에 올라온 글</h3>
+              <ul>
+                <s_rctps_rep>
+                  <li>
+                    <a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a>
+                    <span style="color: var(--primary); font-size: 11px;">([##_rctps_rep_rp_cnt_##])</span>
+                  </li>
+                </s_rctps_rep>
+              </ul>
+            </div>
+          </s_sidebar_element>
+
+          <!-- Popular Posts Widget -->
+          <s_sidebar_element>
+            <!-- 인기글 -->
+            <div class="sidebar-card">
+              <h3 class="sidebar-title">인기글</h3>
+              <ul>
+                <s_rctps_popular_rep>
+                  <li>
+                    <a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a>
+                  </li>
+                </s_rctps_popular_rep>
+              </ul>
+            </div>
+          </s_sidebar_element>
+
+          <!-- Visitor Counter Widget -->
+          <s_sidebar_element>
+            <!-- 카운터 -->
+            <div class="sidebar-card">
+              <h3 class="sidebar-title">방문자 수</h3>
+              <div style="font-size: 12px; display: flex; flex-direction: column; gap: 4px; color: var(--text-muted);">
+                <div>Total : <strong style="color: #fff;">[##_count_total_##]</strong></div>
+                <div>Today : <strong style="color: var(--primary);">[##_count_today_##]</strong></div>
+                <div>Yesterday : <strong style="color: #fff;">[##_count_yesterday_##]</strong></div>
+              </div>
+            </div>
+          </s_sidebar_element>
+
+        </s_sidebar>
+      </aside>
+    </div>
+
+    [##_revenue_list_lower_##]
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 [##_title_##]. Powered by Tistory Theme Preview Suite.</p>
+    </div>
+  </footer>
+
+</s_t3>
+</body>
+</html>
