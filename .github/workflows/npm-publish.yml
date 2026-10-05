@@ -29,5 +29,6 @@ jobs:
         run: npm test
 
       # --provenance 옵션을 붙여 비밀 토큰 없이 OIDC 신뢰 연동만으로 안전하게 배포합니다.
+      # 신규 패키지 최초 배포 시 provenance 생성을 위해 --access public이 필요합니다.
       - name: Publish Package to npm
-        run: npm publish --provenance
+        run: npm publish --provenance --access public

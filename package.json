@@ -41,5 +41,8 @@
     "sample-theme/",
     "dashboard.html",
     "README.md"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
