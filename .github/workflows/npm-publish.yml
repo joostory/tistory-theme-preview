@@ -2,7 +2,7 @@ name: Node.js Package Publish
 
 on:
   release:
-    types: [published, created]
+    types: [created]
 
 # OIDC 인증을 위해 GitHub ID 토큰을 npm에 제시할 수 있는 권한을 부여합니다.
 permissions:
