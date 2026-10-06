@@ -231,6 +231,41 @@ assert.ok(res6.includes('테스터'));
 assert.ok(res6.includes('방문자'));
 console.log('  ✔ Modern comment & guestbook widgets passed!');
 
+// 10. Pagination & Span Wrapping
+console.log('▶ Test 10: Pagination & Span Wrapping');
+const tplPaging = `
+<a [##_prev_page_##] class="ico_skin link_prev [##_no_more_prev_##]">이전</a>
+<s_paging_rep>
+	<a [##_paging_rep_link_##] class="link_page">[##_paging_rep_link_num_##]</a>
+</s_paging_rep>
+<a [##_next_page_##] class="ico_skin link_next [##_no_more_next_##]">다음</a>
+`;
+
+// Page 1 (default)
+const resPaging1 = compile(tplPaging, {
+  viewType: 'index',
+  currentPage: 1
+});
+assert.ok(resPaging1.includes('class="ico_skin link_prev no-more-prev">이전</a>'));
+assert.ok(resPaging1.includes('<a href="/?page=1" class="link_page"><span class="selected">1</span></a>'));
+assert.ok(resPaging1.includes('<a href="/?page=2" class="link_page"><span class="">2</span></a>'));
+assert.ok(resPaging1.includes('<a href="/?page=3" class="link_page"><span class="">3</span></a>'));
+assert.ok(resPaging1.includes('<a href="/?page=4" class="link_page"><span class="">4</span></a>'));
+assert.ok(resPaging1.includes('<a  class="link_page"><span class="">···</span></a>'));
+assert.ok(resPaging1.includes('<a href="/?page=123" class="link_page"><span class="">123</span></a>'));
+assert.ok(resPaging1.includes('<a href="/?page=2" class="ico_skin link_next ">다음</a>'));
+
+// Page 2
+const resPaging2 = compile(tplPaging, {
+  viewType: 'index',
+  currentPage: 2
+});
+assert.ok(resPaging2.includes('<a href="/?page=1" class="ico_skin link_prev ">이전</a>'));
+assert.ok(resPaging2.includes('<a href="/?page=1" class="link_page"><span class="">1</span></a>'));
+assert.ok(resPaging2.includes('<a href="/?page=2" class="link_page"><span class="selected">2</span></a>'));
+assert.ok(resPaging2.includes('<a href="/?page=3" class="ico_skin link_next ">다음</a>'));
+console.log('  ✔ Pagination & Span wrapping passed!');
+
 console.log('\n======================================');
 console.log(' 🎉 All unit tests passed successfully!');
 console.log('======================================\n');
