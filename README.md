@@ -104,6 +104,10 @@ tistory-theme-preview [옵션]
         }
       ]
     }
+  ],
+  "links": [
+    { "site": "JooStory.net", "url": "https://joostory.net" },
+    { "site": "Github", "url": "https://github.com/joostory" }
   ]
 }
 ```

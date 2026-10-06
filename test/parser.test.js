@@ -266,6 +266,59 @@ assert.ok(resPaging2.includes('<a href="/?page=2" class="link_page"><span class=
 assert.ok(resPaging2.includes('<a href="/?page=3" class="ico_skin link_next ">다음</a>'));
 console.log('  ✔ Pagination & Span wrapping passed!');
 
+// 11. Sidebar Link Substitutions (Issue #1)
+console.log('▶ Test 11: Sidebar Link Substitutions (s_link / s_link_rep / link_url / link_site)');
+const tplLink = `
+<s_sidebar_element>
+<!-- 링크 -->
+	<div class="box_aside">
+		<strong>링크</strong>
+		<ul class="list_board">
+			<s_link_rep>
+				<li><a href="[##_link_url_##]" class="link_board" target="_blank">[##_link_site_##]</a></li>
+			</s_link_rep>
+		</ul>
+	</div>
+</s_sidebar_element>
+`;
+
+// Test 11-1: Default links fallback
+const resLinkDefault = compile(tplLink, {});
+assert.ok(resLinkDefault.includes('<a href="https://joostory.net" class="link_board" target="_blank">JooStory.net</a>'));
+assert.ok(resLinkDefault.includes('<a href="https://github.com/joostory" class="link_board" target="_blank">Github</a>'));
+assert.ok(resLinkDefault.includes('<a href="https://x.com/@JooStory" class="link_board" target="_blank">X</a>'));
+assert.ok(resLinkDefault.includes('<a href="https://www.linkedin.com/in/hyeokjoo/" class="link_board" target="_blank">LinkedIn</a>'));
+
+// Test 11-2: Custom links override & [##_link_name_##] alias
+const tplLinkCustom = `
+<s_link>
+  <ul>
+    <s_link_rep>
+      <li><a href="[##_link_url_##]">[##_link_name_##]</a></li>
+    </s_link_rep>
+  </ul>
+</s_link>
+`;
+const resLinkCustom = compile(tplLinkCustom, {
+  links: [
+    { site: 'Google', url: 'https://google.com' },
+    { name: 'MDN Web Docs', url: 'https://developer.mozilla.org' }
+  ]
+});
+assert.ok(resLinkCustom.includes('<a href="https://google.com">Google</a>'));
+assert.ok(resLinkCustom.includes('<a href="https://developer.mozilla.org">MDN Web Docs</a>'));
+
+// Test 11-3: Empty links hides <s_link>
+const resLinkEmpty = compile(tplLinkCustom, { links: [] });
+assert.strictEqual(resLinkEmpty.trim(), '');
+
+// Test 11-4: mock_data.js defaultLinks verification
+assert.ok(Array.isArray(mockData.links));
+assert.strictEqual(mockData.links.length, 4);
+assert.strictEqual(mockData.links[0].site, 'JooStory.net');
+assert.strictEqual(mockData.links[0].url, 'https://joostory.net');
+console.log('  ✔ Sidebar link substitutions passed!');
+
 console.log('\n======================================');
 console.log(' 🎉 All unit tests passed successfully!');
 console.log('======================================\n');
