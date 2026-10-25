@@ -1,6 +1,6 @@
 {
   "name": "tistory-theme-preview",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Zero-config local live preview & debugging suite for Tistory custom themes and skins.",
   "main": "lib/server.js",
   "bin": {
