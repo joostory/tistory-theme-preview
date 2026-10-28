@@ -333,6 +333,15 @@
       transform: translateX(18px);
     }
 
+    input:disabled + .slider {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .form-group.disabled {
+      opacity: 0.5;
+    }
+
     .action-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--panel-border);
@@ -566,7 +575,7 @@
         <h3>스킨 옵션 (Skin Options)</h3>
 
         <!-- Home Cover Toggle -->
-        <div class="form-group" style="flex-direction: row; justify-content: space-between; align-items: center;">
+        <div class="form-group" id="cover-toggle-group" style="flex-direction: row; justify-content: space-between; align-items: center;">
           <span class="form-label" style="margin: 0;">홈 커버 표시 (s_cover)</span>
           <label class="toggle-switch">
             <input type="checkbox" id="toggle-cover" checked>
@@ -623,6 +632,7 @@
       viewType: 'index',
       device: 'desktop',
       isLandscape: false,
+      hasCover: true,
       enableCovers: true,
       variables: {},
       searchQuery: 'CSS',
@@ -637,6 +647,7 @@
     const currentViewBadge = document.getElementById('current-view-badge');
     const dynamicVarsContainer = document.getElementById('dynamic-variables-container');
     const toggleCover = document.getElementById('toggle-cover');
+    const coverToggleGroup = document.getElementById('cover-toggle-group');
 
     // Build URL from state
     function buildRenderUrl() {
@@ -745,18 +756,47 @@
     });
 
     // Reset button
-    document.getElementById('btn-reset').addEventListener('click', () => {
+    document.getElementById('btn-reset').addEventListener('click', async () => {
       state.variables = {};
-      loadSkinInfo();
+      state.enableCovers = state.hasCover;
+      await loadSkinInfo(true);
       updatePreview();
     });
 
     // Load skin info from index.xml
-    async function loadSkinInfo() {
+    async function loadSkinInfo(isReset = false) {
       try {
         const res = await fetch('/api/skin-info');
         const json = await res.json();
         dynamicVarsContainer.innerHTML = '';
+
+        const hasCover = Boolean(json.hasCover);
+        const prevEnableCovers = state.enableCovers;
+        state.hasCover = hasCover;
+
+        if (!hasCover) {
+          state.enableCovers = false;
+          toggleCover.checked = false;
+          toggleCover.disabled = true;
+          if (coverToggleGroup) {
+            coverToggleGroup.classList.add('disabled');
+            coverToggleGroup.title = '이 스킨에는 홈 커버(s_cover)가 정의되어 있지 않습니다.';
+          }
+        } else {
+          toggleCover.disabled = false;
+          if (coverToggleGroup) {
+            coverToggleGroup.classList.remove('disabled');
+            coverToggleGroup.title = '';
+          }
+          if (isReset) {
+            state.enableCovers = true;
+          }
+          toggleCover.checked = state.enableCovers;
+        }
+
+        if (prevEnableCovers !== state.enableCovers && !isReset) {
+          updatePreview();
+        }
 
         if (json.hasIndexXml && json.data.variables && json.data.variables.length > 0) {
           json.data.variables.forEach(v => {

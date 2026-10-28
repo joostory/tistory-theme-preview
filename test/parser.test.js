@@ -154,6 +154,13 @@ const res3_disabled = compile(tpl3, {
   covers: [{ name: 'featured', title: '추천 포스트', items: [] }]
 });
 assert.strictEqual(res3_disabled.trim(), '');
+
+const res3_empty_covers = compile(tpl3, {
+  viewType: 'index',
+  enableCovers: true,
+  covers: []
+});
+assert.strictEqual(res3_empty_covers.trim(), '');
 console.log('  ✔ Home covers rendering passed!');
 
 // 7. Post Loop & View Mode Separation (Index vs Permalink)
@@ -176,6 +183,15 @@ const res4_index = compile(tpl4, {
 });
 assert.ok(res4_index.includes('class="card"'));
 assert.ok(!res4_index.includes('class="full"'));
+
+// If enableCovers is true, but covers is empty/absent, index articles should still render
+const res4_index_no_covers = compile(tpl4, {
+  viewType: 'index',
+  enableCovers: true,
+  covers: [],
+  posts: [{ id: '1', title: '글제목-1' }]
+});
+assert.ok(res4_index_no_covers.includes('class="card"'));
 
 const res4_permalink = compile(tpl4, {
   viewType: 'permalink',
